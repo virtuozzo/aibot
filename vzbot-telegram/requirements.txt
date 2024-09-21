@@ -1,0 +1,5 @@
+logtail==1.0.1
+logtail_python==0.3.1
+python-dotenv==1.0.1
+python-telegram-bot==21.6
+Requests==2.32.3

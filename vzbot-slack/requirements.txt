@@ -1,0 +1,7 @@
+Flask==3.0.3
+Flask_Cors==5.0.0
+logtail==1.0.1
+logtail_python==0.3.1
+python-dotenv==1.0.1
+Requests==2.32.3
+slack_bolt==1.20.1

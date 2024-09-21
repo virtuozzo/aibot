@@ -1,0 +1,22 @@
+services:
+  webserver:
+    image: "vporokhov/vzbot-server"
+    volumes:
+    - ./faiss_db:/faiss_db
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+  telegram:
+    image: "vporokhov/vzbot-telegram"
+    env_file:
+      - .env
+  slack:
+    image: "vporokhov/vzbot-slack"
+    volumes:
+    - ./ssl:/ssl
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+  
