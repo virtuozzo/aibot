@@ -21,8 +21,8 @@ model_name = os.getenv("MODEL_NAME")
 embeddings_name = os.getenv("EMB_MODEL_NAME")
 betterstack_token = os.getenv("BETTERSTACK_TOKEN")
 base_url = os.getenv("BASE_URL")
-k_value = os.getenv("K_VALUE")
-temperature = os.getenv("TEMPERATURE")
+k_value = int(os.getenv("K_VALUE"))
+temperature = float(os.getenv("TEMPERATURE"))
 
 #BetterStack logger if token is provided  
 if betterstack_token:
