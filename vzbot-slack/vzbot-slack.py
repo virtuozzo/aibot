@@ -7,7 +7,7 @@ from logtail import LogtailHandler
 from slack_bolt import App
 from flask import Flask, request
 from flask_cors import CORS
-from slack_bolt.adapter.socket_mode import SocketModeHandler
+from slack_bolt.adapter.flask import SlackRequestHandler
 
 import logging
 logging.basicConfig(level=logging.DEBUG)
@@ -29,7 +29,10 @@ if betterstack_token:
   logger.info('bot_start')
   print("betterstack is ready")
 
+app = Flask(__name__)
+CORS(app)
 slack_app = App(token=slack_bot_token, signing_secret=slack_signing_secret)
+handler = SlackRequestHandler(slack_app)
 
 print("SLACK BOT IS READY")
 
@@ -108,6 +111,9 @@ def handle_message(event, say):
       print(f"Error: {str(e)}\nTraceback: {traceback.format_exc()}")
       say("An error occurred. Please try again later.")
 
+@app.route('/slack/events', methods=['POST'])
+def slack_events():
+    return handler.handle(request)
+
 if __name__ == '__main__':
-    SocketModeHandler(slack_app, slack_bot_token).start()
-  
+    app.run(debug=False, host="0.0.0.0", port=3000, ssl_context=('./ssl/fullchain.pem', './ssl/privkey.pem'))
